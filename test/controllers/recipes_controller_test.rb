@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class RecipesControllerTest < ActionDispatch::IntegrationTest
@@ -5,30 +7,32 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     @recipe = recipes(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get recipes_url, as: :json
     assert_response :success
   end
 
-  test "should create recipe" do
+  test 'should create recipe' do
     assert_difference('Recipe.count') do
-      post recipes_url, params: { recipe: { cal_per_serv: @recipe.cal_per_serv, comment: @recipe.comment, title: @recipe.title, total_time: @recipe.total_time, yields: @recipe.yields } }, as: :json
+      post recipes_url,
+           params: { recipe: { cal_per_serv: @recipe.cal_per_serv, comment: @recipe.comment, title: @recipe.title, total_time: @recipe.total_time, yields: @recipe.yields } }, as: :json
     end
 
     assert_response 201
   end
 
-  test "should show recipe" do
+  test 'should show recipe' do
     get recipe_url(@recipe), as: :json
     assert_response :success
   end
 
-  test "should update recipe" do
-    patch recipe_url(@recipe), params: { recipe: { cal_per_serv: @recipe.cal_per_serv, comment: @recipe.comment, title: @recipe.title, total_time: @recipe.total_time, yields: @recipe.yields } }, as: :json
+  test 'should update recipe' do
+    patch recipe_url(@recipe),
+          params: { recipe: { cal_per_serv: @recipe.cal_per_serv, comment: @recipe.comment, title: @recipe.title, total_time: @recipe.total_time, yields: @recipe.yields } }, as: :json
     assert_response 200
   end
 
-  test "should destroy recipe" do
+  test 'should destroy recipe' do
     assert_difference('Recipe.count', -1) do
       delete recipe_url(@recipe), as: :json
     end

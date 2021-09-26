@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :update, :destroy]
+  before_action :set_recipe, only: %i[show update destroy]
 
   # GET /recipes
   def index
@@ -39,13 +41,14 @@ class RecipesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recipe
-      @recipe = Recipe.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def recipe_params
-      params.require(:recipe).permit(:title, :cal_per_serv, :yields, :total_time, :comment)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def recipe_params
+    params.require(:recipe).permit(:title, :cal_per_serv, :yields, :total_time, :comment)
+  end
 end
