@@ -34,6 +34,9 @@ gem 'devise', '~> 4.2'
 # JWT devise for API
 gem 'devise-jwt'
 
+# Annotate models and more
+gem 'annotate'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
