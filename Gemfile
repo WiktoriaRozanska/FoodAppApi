@@ -15,8 +15,6 @@ gem 'puma', '~> 4.1'
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 
 # rubocop
 gem 'rubocop-rails', require: false
@@ -28,7 +26,16 @@ gem 'rubocop-rails', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
+
+# Authentication
+gem 'devise', '~> 4.2'
+
+# JWT devise for API
+gem 'devise-jwt'
+
+# Annotate models and more
+gem 'annotate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
