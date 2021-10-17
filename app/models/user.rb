@@ -30,7 +30,7 @@ class User < ApplicationRecord
          :validatable,
          :confirmable,
          :jwt_authenticatable,
-         jwt_revocation_strategy: self
+         jwt_revocation_strategy: JwtDenylist
 
   # # VALIDATION
   # validates :password, presence: true
