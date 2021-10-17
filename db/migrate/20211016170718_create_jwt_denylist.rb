@@ -1,4 +1,4 @@
-class CreateAllowlistedJwd < ActiveRecord::Migration[6.0]
+class CreateJwtDenylist < ActiveRecord::Migration[6.0]
   create_table :jwt_denylist do |t|
     t.string :jti, null: false
     t.datetime :exp, null: false

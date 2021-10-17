@@ -47,6 +47,7 @@ group :development, :test do
 
   # Shim to load environment variables from .env into ENV in development
   gem 'dotenv-rails'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do
