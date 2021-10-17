@@ -312,12 +312,6 @@ Devise.setup do |config|
   # Secret key configuration witch will be used to sign generated tokens.
   config.jwt do |jwt|
     jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
-    jwt.dispatch_requests = [
-        ['POST', %r{^/signin$}],
-    ]
-    # jwt.revocation_request = [
-    #     ['DELETE', %r{^/signout$}]
-    # ]
     jwt.expiration_time = 14.days.to_i
     jwt.aud_header = 'JWT_AUD'
   end
