@@ -32,7 +32,8 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          jwt_revocation_strategy: JwtDenylist
 
-  # # VALIDATION
+  # VALIDATION
+  validates :first_name, :last_name, :username, presence: true
   # validates :password, presence: true
   # validates :password_confirmation, presence: true
   # validates :password, confirmation: { case_sensitive: true }
