@@ -32,9 +32,9 @@ module ExceptionHandler
       render json: msg(exc), status: :bad_request
     end
 
-    rescue_from CanCan::AccessDenied do |exc|
-      render json: msg(exc), status: :forbidden
-    end
+    # rescue_from CanCan::AccessDenied do |exc|
+    #   render json: msg(exc), status: :forbidden
+    # end
   end
 
   private

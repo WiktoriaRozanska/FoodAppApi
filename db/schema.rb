@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 2021_12_12_123805) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
+    t.integer "quantity"
+    t.string "unit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "recipe_id"
