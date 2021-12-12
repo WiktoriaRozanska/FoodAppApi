@@ -10,19 +10,10 @@ class V1::RecipesController < V1Controller
   end
 
   def show
-    render json: @recipe
   end
 
   def create
-    byebug
-    V1::RecipeService.call(User.first, title, description, cal_per_serv, yields, time, ingredients, steps, tags)
-    # @recipe = Recipe.new(recipe_params.merge({user: current_user}))
-
-    if @recipe.save
-      render json: @recipe, status: :created, location: @recipe
-    else
-      render json: @recipe.errors, status: :unprocessable_entity
-    end
+    @recipe = V1::RecipeService.call(User.first, title, description, cal_per_serv, yields, time, ingredients, steps, tags)
   end
 
   def update

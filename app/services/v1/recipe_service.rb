@@ -17,14 +17,17 @@ class V1::RecipeService
 
   def call
     ActiveRecord::Base.transaction do
-      recipe = Recipe.create!(user: user, title: title, cal_per_serv: cal_per_serv, time: time, yields: yields, description: description)
+      @recipe = Recipe.create!(user: user, title: title, cal_per_serv: cal_per_serv, time: time, yields: yields, description: description)
 
       V1::Recipes::StepsService.call(recipe, steps)
       V1::Recipes::TagsService.call(recipe, tags)
       V1::Recipes::IngredientsService.call(recipe, ingredients)
     end
+
+    recipe.reload
   end
 
   private
   attr_reader :user, :title, :description, :cal_per_serv, :yields, :time, :ingredients, :steps, :tags
+  attr_accessor :recipe
 end
