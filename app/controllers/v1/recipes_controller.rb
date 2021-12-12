@@ -1,23 +1,21 @@
 # frozen_string_literal: true
 
-class RecipesController < ApplicationController
+class V1::RecipesController < V1Controller
   before_action :set_recipe, only: %i[show update destroy]
 
-  # GET /recipes
   def index
     @recipes = Recipe.all
 
     render json: @recipes
   end
 
-  # GET /recipes/1
   def show
     render json: @recipe
   end
 
-  # POST /recipes
   def create
-    @recipe = Recipe.new(recipe_params)
+    byebug
+    @recipe = Recipe.new(recipe_params.merge({user: current_user}))
 
     if @recipe.save
       render json: @recipe, status: :created, location: @recipe
@@ -26,7 +24,6 @@ class RecipesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /recipes/1
   def update
     if @recipe.update(recipe_params)
       render json: @recipe
@@ -35,20 +32,17 @@ class RecipesController < ApplicationController
     end
   end
 
-  # DELETE /recipes/1
   def destroy
     @recipe.destroy
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_recipe
     @recipe = Recipe.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
   def recipe_params
-    params.require(:recipe).permit(:title, :cal_per_serv, :yields, :total_time, :comment)
+    params.require(:recipe).permit(:title, :cal_per_serv, :yields, :total_time, :comment, ingredients: [], steps:[])
   end
 end

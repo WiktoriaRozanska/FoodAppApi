@@ -6,8 +6,8 @@ class CreateRecipes < ActiveRecord::Migration[6.0]
       t.string :title
       t.integer :cal_per_serv
       t.integer :yields
-      t.integer :total_time
-      t.string :comment
+      t.integer :time
+      t.string :description
 
       t.timestamps
     end
