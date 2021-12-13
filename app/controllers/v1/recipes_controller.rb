@@ -4,9 +4,7 @@ class V1::RecipesController < V1Controller
   before_action :set_recipe, only: %i[show update destroy]
 
   def index
-    @recipes = Recipe.all
-
-    render json: @recipes
+    @recipes = V1::Pagination.call(Recipe.all, start_index, size)
   end
 
   def show
@@ -25,6 +23,7 @@ class V1::RecipesController < V1Controller
   end
 
   def destroy
+    # ToDo: only owner can delete recipe
     @recipe.destroy
   end
 
@@ -36,6 +35,14 @@ class V1::RecipesController < V1Controller
 
   def recipe_params
     params.require(:recipe).permit(:title, :cal_per_serv, :yields, :time, :description, ingredients: [], steps:[], tags: [])
+  end
+
+  def start_index
+    params[:startIndex].to_i
+  end
+
+  def size
+    params[:size].to_i
   end
 
   def title

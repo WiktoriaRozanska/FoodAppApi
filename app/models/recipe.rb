@@ -30,4 +30,7 @@ class Recipe < ApplicationRecord
   validates :cal_per_serv, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :yields, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  # scopes
+  scope :indexing, ->(ids) { where(id: ids) }
+
 end
