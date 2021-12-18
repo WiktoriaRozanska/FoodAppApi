@@ -32,6 +32,14 @@ module ExceptionHandler
       render json: msg(exc), status: :bad_request
     end
 
+    rescue_from ActionView::Template::Error do |exc|
+      render json: msg(exc), status: :unprocessable_entity
+    end
+
+    rescue_from NoMethodError do |exc|
+      render json: msg(exc), status: :unprocessable_entity
+    end
+
     # rescue_from CanCan::AccessDenied do |exc|
     #   render json: msg(exc), status: :forbidden
     # end

@@ -27,10 +27,10 @@ ActiveRecord::Schema.define(version: 2021_12_12_123805) do
   create_table "favorites", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "users_id"
+    t.uuid "user_id"
     t.uuid "recipe_id"
     t.index ["recipe_id"], name: "index_favorites_on_recipe_id"
-    t.index ["users_id"], name: "index_favorites_on_users_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2021_12_12_123805) do
   end
 
   add_foreign_key "favorites", "recipes"
-  add_foreign_key "favorites", "users", column: "users_id"
+  add_foreign_key "favorites", "users"
   add_foreign_key "ingredients", "recipes"
   add_foreign_key "keywords", "recipes"
   add_foreign_key "recipe_tags", "recipes"

@@ -32,5 +32,11 @@ class Recipe < ApplicationRecord
 
   # scopes
   scope :indexing, ->(ids) { where(id: ids) }
+  scope :limit_to_tags, ->(tag_ids) { joins(:keywords).where("keywords.id" => tag_ids) if tag_ids.present? }
 
+
+  def self.detailed_search(tag_ids)
+    scope = all
+    scope.limit_to_tags(tag_ids)
+  end
 end

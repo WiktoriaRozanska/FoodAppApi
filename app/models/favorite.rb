@@ -13,4 +13,6 @@
 class Favorite < ApplicationRecord
   belongs_to :user
   belongs_to :recipe
+
+  scope :indexing, ->(ids) { where(id: ids) }
 end

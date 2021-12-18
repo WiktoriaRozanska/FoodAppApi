@@ -4,14 +4,15 @@ class V1::RecipesController < V1Controller
   before_action :set_recipe, only: %i[show update destroy]
 
   def index
-    @recipes = V1::Pagination.call(Recipe.all, start_index, size)
+    @recipes = Recipe.detailed_search(filters_parameters)
+    @recipes = V1::Pagination.call(@recipes, start_index, size)
   end
 
   def show
   end
 
   def create
-    @recipe = V1::RecipeService.call(User.first, title, description, cal_per_serv, yields, time, ingredients, steps, tags)
+    @recipe = V1::RecipeService.call(current_user, title, description, cal_per_serv, yields, time, ingredients, steps, tags)
   end
 
   def update
@@ -27,6 +28,11 @@ class V1::RecipesController < V1Controller
     @recipe.destroy
   end
 
+  def my_recipes
+    @recipes = current_user.recipes
+    @recipes = V1::Pagination.call(@recipes, start_index, size) if @recipes.present?
+  end
+
   private
 
   def set_recipe
@@ -35,6 +41,10 @@ class V1::RecipesController < V1Controller
 
   def recipe_params
     params.require(:recipe).permit(:title, :cal_per_serv, :yields, :time, :description, ingredients: [], steps:[], tags: [])
+  end
+
+  def filters_parameters
+    params[:filters]&.map(&:to_i)
   end
 
   def start_index
