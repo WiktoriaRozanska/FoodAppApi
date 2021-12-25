@@ -26,4 +26,16 @@ class User < ApplicationRecord
   has_many :days, through: :week_plans
 
   enum day: { mon: 'Mon', tue: 'Tue', wed: 'Wed', thu: 'Thu', fri: 'Fri', sat: 'Sat', sun: 'Sun' }
+
+  after_create_commit :create_week_plan
+
+  private
+
+  def create_week_plan
+    WeekPlan.create(user_id: self.id)
+
+    %w[Mon Tue Wed Thu Fri Sat Sun].each_with_index do |day, index|
+      self.week_plan << Day.new(name: day, position: index)
+    end
+  end
 end

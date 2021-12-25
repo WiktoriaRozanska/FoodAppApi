@@ -1,6 +1,6 @@
 class V1::WeekPlanService
   def self.call(recipe_id, days, user)
-    new(recipe_id, days, user)
+    new(recipe_id, days, user).call
   end
 
   def initialize(recipe_id, days, user)
@@ -10,7 +10,6 @@ class V1::WeekPlanService
   end
 
   def call
-    byebug
     week_plan = WeekPlan.find_or_create_by(user_id: user.id)
     recipe = Recipe.find(recipe_id)
 

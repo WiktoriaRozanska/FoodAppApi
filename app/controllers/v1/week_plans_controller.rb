@@ -12,7 +12,7 @@ class V1::WeekPlansController < V1Controller
   end
 
   def index
-
+    @week_plan = current_user.week_plan
   end
 
   private

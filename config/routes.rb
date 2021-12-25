@@ -13,8 +13,19 @@ Rails.application.routes.draw do
     resource :recipe do
       scope module: 'recipes' do
         resources :favorites, only: %i[index destroy]
-        resources :week_plans, only: %i[create index destroy]
       end
+    end
+
+    resources :week_plans, only: %i[create index destroy]
+
+    resource :week_plan do
+        scope module: 'week_plans' do
+          resources :day do
+            scope module: 'days' do
+              resources :recipes, only: %i[destroy]
+            end
+          end
+        end
     end
   end
 end
