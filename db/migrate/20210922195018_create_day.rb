@@ -5,7 +5,7 @@ class CreateDay < ActiveRecord::Migration[6.0]
     create_table :days do |t|
       t.string :name
       t.integer :position
-      t.belongs_to :week_day
+      t.belongs_to :week_plan
 
       t.timestamps
     end
