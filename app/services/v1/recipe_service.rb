@@ -17,7 +17,7 @@ class V1::RecipeService
 
   def call
     ActiveRecord::Base.transaction do
-      @recipe = Recipe.create!(user: user, title: title, cal_per_serv: cal_per_serv, time: time, yields: yields, description: description)
+      @recipe = Recipe.create!(user_id: user.id, title: title, cal_per_serv: cal_per_serv, time: time, yields: yields, description: description)
 
       V1::Recipes::StepsService.call(recipe, steps)
       V1::Recipes::TagsService.call(recipe, tags)

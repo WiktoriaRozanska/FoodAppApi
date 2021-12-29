@@ -26,6 +26,7 @@ class V1::RecipesController < V1Controller
   def destroy
     # ToDo: only owner can delete recipe
     @recipe.destroy
+    head :ok
   end
 
   def my_recipes

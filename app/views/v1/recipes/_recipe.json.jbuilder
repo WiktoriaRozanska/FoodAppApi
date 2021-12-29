@@ -11,3 +11,10 @@ end
 json.tags do
   json.array! recipe.tags, partial: 'v1/tags/tag', as: :tag
 end
+
+json.owner recipe.user_id.eql?(current_user.id)
+
+json.favorite current_user.favorites.find_by(recipe_id: recipe.id).present?
+
+
+json.image_url recipe.image.attached? ? url_for(recipe.image) : nil

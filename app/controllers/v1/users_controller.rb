@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-class V1::TagsController < V1Controller
+class V1::UsersController < V1Controller
   def me
     @user = current_user
   end
 
   def update
+    byebug
     load_user.update!(permitted_params)
 
     @user = current_user.reload

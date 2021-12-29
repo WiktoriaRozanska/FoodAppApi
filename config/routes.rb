@@ -10,13 +10,20 @@ Rails.application.routes.draw do
     resources :users, only: %i[update]
     get 'me', to: 'users#me', as: :get_user_details
 
+    resources :recipes, only: %i[delete] do
+      scope module: 'recipes' do
+        resource :image, only: %i[create]
+      end
+    end
+
     resource :recipe do
       scope module: 'recipes' do
-        resources :favorites, only: %i[index destroy]
+        resources :favorites, only: %i[index destroy create]
       end
     end
 
     resources :week_plans, only: %i[create index destroy]
+    resource :shopping_list, only: %i[show]
 
     resource :week_plan do
         scope module: 'week_plans' do

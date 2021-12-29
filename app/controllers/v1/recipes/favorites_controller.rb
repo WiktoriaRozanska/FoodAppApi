@@ -7,6 +7,8 @@ class V1::Recipes::FavoritesController < V1Controller
   end
 
   def create
+    head :ok if current_user.favorites.find_by(recipe_id: recipe_id).present?
+
     current_user.favorites << Favorite.new(recipe_id: recipe_id)
 
     head :ok
@@ -14,7 +16,7 @@ class V1::Recipes::FavoritesController < V1Controller
 
   def destroy
     # ToDo: only owner can delete recipe
-    Favorite.find(id).destroy
+    current_user.favorites.find_by(recipe_id: id)&.destroy
 
     head :ok
   end

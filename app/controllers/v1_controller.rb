@@ -3,10 +3,10 @@
 class V1Controller < ApplicationController
   include ExceptionHandler
 
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def current_user
-    # @current_user ||= super
-    User.first
+    @current_user ||= super
+    # User.first
   end
 end

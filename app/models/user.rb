@@ -35,7 +35,8 @@ class User < ApplicationRecord
     WeekPlan.create(user_id: self.id)
 
     %w[Mon Tue Wed Thu Fri Sat Sun].each_with_index do |day, index|
-      self.week_plan << Day.new(name: day, position: index)
+      # self.week_plan.days << Day.new(name: day, position: index)
+      Day.create(name: day, position: index, week_plan_id: self.week_plan.id)
     end
   end
 end
