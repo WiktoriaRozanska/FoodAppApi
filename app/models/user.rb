@@ -19,11 +19,11 @@ class User < ApplicationRecord
   # validates :password, length: { minimum: 8 }
 
   # RELATIONSHIP
-  has_many :recipes, inverse_of: :user
-  has_many :favorites, inverse_of: :user
-  has_many :shop_lists, inverse_of: :user
-  has_one :week_plan, inverse_of: :user
-  has_many :days, through: :week_plans
+  has_many :recipes, inverse_of: :user, dependent: :nullify
+  has_many :favorites, inverse_of: :user, dependent: :destroy
+  has_many :shop_lists, inverse_of: :user, dependent: :destroy
+  has_one :week_plan, inverse_of: :user, dependent: :destroy
+  has_many :days, through: :week_plans, dependent: :destroy
 
   enum day: { mon: 'Mon', tue: 'Tue', wed: 'Wed', thu: 'Thu', fri: 'Fri', sat: 'Sat', sun: 'Sun' }
 
@@ -32,11 +32,11 @@ class User < ApplicationRecord
   private
 
   def create_week_plan
-    WeekPlan.create(user_id: self.id)
+    WeekPlan.create(user_id: id)
 
     %w[Mon Tue Wed Thu Fri Sat Sun].each_with_index do |day, index|
       # self.week_plan.days << Day.new(name: day, position: index)
-      Day.create(name: day, position: index, week_plan_id: self.week_plan.id)
+      Day.create(name: day, position: index, week_plan_id: week_plan.id)
     end
   end
 end

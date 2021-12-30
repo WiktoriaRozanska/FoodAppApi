@@ -6,7 +6,6 @@ class V1::UsersController < V1Controller
   end
 
   def update
-    byebug
     load_user.update!(permitted_params)
 
     @user = current_user.reload

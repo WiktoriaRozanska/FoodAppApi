@@ -11,5 +11,5 @@
 #
 class WeekPlan < ApplicationRecord
   belongs_to :user
-  has_many :days, inverse_of: :week_plan
+  has_many :days, inverse_of: :week_plan, dependent: :destroy
 end

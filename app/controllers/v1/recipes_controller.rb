@@ -8,23 +8,20 @@ class V1::RecipesController < V1Controller
     @recipes = V1::Pagination.call(@recipes, start_index, size)
   end
 
-  def show
-  end
+  def show; end
 
   def create
-    @recipe = V1::RecipeService.call(current_user, title, description, cal_per_serv, yields, time, ingredients, steps, tags)
+    @recipe = V1::RecipeService.call(current_user, title, description, cal_per_serv, yields, time, ingredients, steps,
+                                     tags)
   end
 
   def update
-    if @recipe.update(recipe_params)
-      render json: @recipe
-    else
-      render json: @recipe.errors, status: :unprocessable_entity
-    end
+    @recipe = V1::Recipes::UpdateService.call(recipe_id, title, description, cal_per_serv, yields, time, ingredients,
+                                              steps, tags)
   end
 
   def destroy
-    # ToDo: only owner can delete recipe
+    # TODO: only owner can delete recipe
     @recipe.destroy
     head :ok
   end
@@ -41,7 +38,12 @@ class V1::RecipesController < V1Controller
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :cal_per_serv, :yields, :time, :description, ingredients: [], steps:[], tags: [])
+    params.require(:recipe).permit(:title, :cal_per_serv, :yields, :time, :description, ingredients: [], steps: [],
+                                                                                        tags: [])
+  end
+
+  def update_params
+    params.require(:recipe).permit(:title, :cal_per_serv, :yields, :time, :description, ingredients: [], steps: [])
   end
 
   def filters_parameters
@@ -86,5 +88,9 @@ class V1::RecipesController < V1Controller
 
   def tags
     recipe_params[:tags]
+  end
+
+  def recipe_id
+    params[:id]
   end
 end

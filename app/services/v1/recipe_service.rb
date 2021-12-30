@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class V1::RecipeService
+  # rubocop:disable Metrics/ParameterLists
   def self.call(user, title, description, cal_per_serv, yields, time, ingredients, steps, tags)
     new(user, title, description, cal_per_serv, yields, time, ingredients, steps, tags).call
   end
@@ -17,7 +20,8 @@ class V1::RecipeService
 
   def call
     ActiveRecord::Base.transaction do
-      @recipe = Recipe.create!(user_id: user.id, title: title, cal_per_serv: cal_per_serv, time: time, yields: yields, description: description)
+      @recipe = Recipe.create!(user_id: user.id, title: title, cal_per_serv: cal_per_serv, time: time, yields: yields,
+                               description: description)
 
       V1::Recipes::StepsService.call(recipe, steps)
       V1::Recipes::TagsService.call(recipe, tags)
@@ -28,6 +32,9 @@ class V1::RecipeService
   end
 
   private
+
   attr_reader :user, :title, :description, :cal_per_serv, :yields, :time, :ingredients, :steps, :tags
   attr_accessor :recipe
+
+  # rubocop:enable Metrics/ParameterLists
 end

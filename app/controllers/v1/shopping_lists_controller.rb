@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class V1::ShoppingListsController < V1Controller
   def show
     ingredient_list = V1::ShoppingListService.call(week_plan_id)

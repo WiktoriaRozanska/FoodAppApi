@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class V1::Recipes::StepsService
   def self.call(recipe, steps)
     new(recipe, steps).call
@@ -15,5 +17,6 @@ class V1::Recipes::StepsService
   end
 
   private
+
   attr_reader :steps, :recipe
 end

@@ -16,5 +16,4 @@ class V1::Recipes::ImagesController < V1Controller
   def image_params
     params[:image]
   end
-
 end

@@ -15,7 +15,7 @@ class V1::Recipes::FavoritesController < V1Controller
   end
 
   def destroy
-    # ToDo: only owner can delete recipe
+    # TODO: only owner can delete recipe
     current_user.favorites.find_by(recipe_id: id)&.destroy
 
     head :ok

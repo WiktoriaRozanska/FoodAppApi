@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class V1::WeekPlanService
   def self.call(recipe_id, days, user)
     new(recipe_id, days, user).call
@@ -23,7 +25,7 @@ class V1::WeekPlanService
 
   private
 
-  ALL_DAYS = %w[Mon Tue Wed Thu Fri Sat Sun]
+  ALL_DAYS = %w[Mon Tue Wed Thu Fri Sat Sun].freeze
 
   def position(day)
     ALL_DAYS.index(day)

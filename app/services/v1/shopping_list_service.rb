@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class V1::ShoppingListService
   def self.call(week_plan_id)
     new(week_plan_id).call
@@ -8,7 +10,7 @@ class V1::ShoppingListService
   end
 
   def call
-    raise ActiveRecord::RecordNotFound.new 'User didn\'t have a week plan'  if week_plan_id.blank?
+    raise ActiveRecord::RecordNotFound, 'User didn\'t have a week plan' if week_plan_id.blank?
 
     generate_shopping_list
   end
@@ -19,8 +21,13 @@ class V1::ShoppingListService
 
   def generate_shopping_list
     week_plan = WeekPlan.find(@week_plan_id)
-
-    shopping_hash = Hash.new { |hash, ingredient_name| hash[ingredient_name] = Hash.new{ |hash, unit| hash[unit] = 0 } }
+    # rubocop:disable Lint/ShadowingOuterLocalVariable
+    shopping_hash = Hash.new do |hash, ingredient_name|
+      hash[ingredient_name] = Hash.new do |hash, unit|
+        hash[unit] = 0
+      end
+    end
+    # rubocop:enable Lint/ShadowingOuterLocalVariable
     week_plan.days.each do |day|
       generate_list_for_day(shopping_hash, day)
     end
@@ -45,7 +52,7 @@ class V1::ShoppingListService
 
     shopping_hash.each do |ingredient_name, _hash|
       shopping_hash[ingredient_name].each do |unit, _hash|
-        shopping_list.append({name: ingredient_name, unit: unit, quantity: shopping_hash[ingredient_name][unit]})
+        shopping_list.append({ name: ingredient_name, unit: unit, quantity: shopping_hash[ingredient_name][unit] })
       end
     end
 

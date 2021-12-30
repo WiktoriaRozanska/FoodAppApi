@@ -18,6 +18,7 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
+  # rubocop:disable Rails/FilePath
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.cache_store = :memory_store
     config.public_file_server.headers = {
@@ -28,6 +29,7 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
+  # rubocop:enable Rails/FilePath
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local

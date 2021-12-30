@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class V1::Recipes::TagsService
   def self.call(recipe, tags)
     new(recipe, tags).call
@@ -15,5 +17,6 @@ class V1::Recipes::TagsService
   end
 
   private
+
   attr_reader :tags, :recipe
 end

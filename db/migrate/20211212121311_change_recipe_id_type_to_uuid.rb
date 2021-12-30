@@ -1,4 +1,5 @@
-# rubocop:disable Rails/ReversibleMigration
+# frozen_string_literal: true
+
 class ChangeRecipeIdTypeToUuid < ActiveRecord::Migration[6.0]
   def change
     add_column :recipes, :uuid, :uuid, default: 'gen_random_uuid()', null: false
@@ -10,4 +11,3 @@ class ChangeRecipeIdTypeToUuid < ActiveRecord::Migration[6.0]
     execute 'ALTER TABLE recipes ADD PRIMARY KEY (id);'
   end
 end
-# rubocop:enable Rails/ReversibleMigration

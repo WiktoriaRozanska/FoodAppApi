@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.extract! day, :id, :name, :position
 
 json.recipes do

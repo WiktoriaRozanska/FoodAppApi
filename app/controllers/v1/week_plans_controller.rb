@@ -7,9 +7,7 @@ class V1::WeekPlansController < V1Controller
     head :ok
   end
 
-  def destroy
-
-  end
+  def destroy; end
 
   def index
     @week_plan = current_user.week_plan

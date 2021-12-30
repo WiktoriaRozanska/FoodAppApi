@@ -18,6 +18,6 @@ class V1::WeekPlans::Days::RecipesController < V1Controller
   end
 
   def load_recipe
-    current_user.week_plan.days.find(day_id)&.recipes_in_days.find_by(recipe_id: recipe_id)
+    current_user.week_plan.days.find(day_id)&.recipes_in_days&.find_by(recipe_id: recipe_id)
   end
 end

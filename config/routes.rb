@@ -26,13 +26,13 @@ Rails.application.routes.draw do
     resource :shopping_list, only: %i[show]
 
     resource :week_plan do
-        scope module: 'week_plans' do
-          resources :day do
-            scope module: 'days' do
-              resources :recipes, only: %i[destroy]
-            end
+      scope module: 'week_plans' do
+        resources :day do
+          scope module: 'days' do
+            resources :recipes, only: %i[destroy]
           end
         end
+      end
     end
   end
 end
