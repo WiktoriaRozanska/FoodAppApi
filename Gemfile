@@ -25,6 +25,7 @@ gem 'devise-jwt'
 gem 'rubocop-performance', require: false
 gem 'rubocop-rspec', require: false
 gem 'rubocop-thread_safety', require: false
+gem 'nokogiri'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -32,6 +33,12 @@ group :development, :test do
   gem 'parallel_tests'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'shoulda-matchers', '~> 3.1'
+end
+
+group :test do
+  gem 'factory_bot_rails'
+  gem 'database_cleaner-active_record'
+  # gem 'knock'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

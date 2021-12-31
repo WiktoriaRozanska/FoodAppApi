@@ -8,7 +8,7 @@ class V1::UsersController < V1Controller
   def update
     load_user.update!(permitted_params)
 
-    @user = current_user.reload
+    @user = load_user.reload
   end
 
   private

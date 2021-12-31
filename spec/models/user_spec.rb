@@ -4,10 +4,9 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   context 'assocations' do
-    it { should have_many(:recipes) }
-    it { should have_many(:favorites) }
-    it { should have_many(:shop_lists) }
-    it { should have_many(:week_plans) }
-    it { should have_many(:days) }
+    it { should have_many(:recipes).dependent(:nullify) }
+    it { should have_many(:favorites).dependent(:destroy) }
+    it { should have_many(:shop_lists).dependent(:destroy) }
+    it { should have_one(:week_plan).dependent(:destroy) }
   end
 end

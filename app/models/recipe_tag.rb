@@ -11,4 +11,6 @@
 #  updated_at :datetime         not null
 #
 class RecipeTag < ApplicationRecord
+  belongs_to :recipe
+  belongs_to :tag
 end
